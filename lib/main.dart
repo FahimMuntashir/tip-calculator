@@ -48,8 +48,19 @@ class _TipCalculatorState extends State<TipCalculator> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('Total Per Person'),
-                    Text('\$168'),
+                    Text('Total Per Person',style: TextStyle(
+                      fontSize: 20.0,
+
+                    ),),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text('\$168',style: TextStyle(
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+
+
+                      ),),
+                    ),
                   ],
                 ),
               ),
@@ -182,6 +193,30 @@ class _TipCalculatorState extends State<TipCalculator> {
                       ),
                     ],
                   ),
+                  Column(
+                    children: <Widget>[
+                      Text("$_tipPercentage",style: TextStyle(
+                        fontSize: 30.0,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                      ),),
+                      Slider(
+
+
+                        divisions: 10,
+                        activeColor: Colors.purple,
+                        inactiveColor: Colors.grey,
+                        min: 0,
+                        max: 100,
+                        value: _tipPercentage.toDouble(),
+                        onChanged: (double newValue){
+                          setState(() {
+                            _tipPercentage = newValue.round();
+                          });
+                        },
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
