@@ -38,21 +38,22 @@ class _TipCalculatorState extends State<TipCalculator> {
           padding: EdgeInsets.all(20.0),
           children: <Widget>[
             Container(
-                height: 150,
-                width: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.0),
-                  color: Colors.teal.withOpacity(.3),
+              height: 150,
+              width: 150,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Colors.teal.withOpacity(.3),
+              ),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Total Per Person'),
+                    Text('\$168'),
+                  ],
                 ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text('Total Per Person'),
-                      Text('\$168'),
-                    ],
-                  ),
-                ),),
+              ),
+            ),
             Container(
               margin: EdgeInsets.only(top: 20.0),
               padding: EdgeInsets.all(10.0),
@@ -63,26 +64,123 @@ class _TipCalculatorState extends State<TipCalculator> {
                   style: BorderStyle.solid,
                 ),
                 borderRadius: BorderRadius.circular(16.0),
-
               ),
               child: Column(
                 children: <Widget>[
                   TextField(
-                    keyboardType:TextInputType.numberWithOptions(decimal: true) ,
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
                     style: TextStyle(color: Colors.teal),
                     decoration: InputDecoration(
 //                      prefixText: ('Bill Amount'),
                       prefixIcon: Icon(Icons.attach_money),
                     ),
-                    onChanged: (String value){
-                      try{
+                    onChanged: (String value) {
+                      try {
                         __billAmount = double.parse(value);
-                      }
-                      catch(exception){
+                      } catch (exception) {
                         __billAmount = 0.0;
                       }
                     },
-
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Split',
+                        style: TextStyle(
+                          color: Colors.teal.shade600,
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                if (_personCounter > 1) {
+                                  _personCounter--;
+                                } else {
+                                  //do nothing
+                                }
+                              });
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.teal.shade600,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Center(
+                                  child: Text(
+                                '-',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 35.0,
+                                ),
+                              )),
+                            ),
+                          ),
+                          Text(
+                            '$_personCounter',
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _personCounter++;
+                              });
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.teal.shade600,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Center(
+                                  child: Text(
+                                '+',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30.0,
+                                ),
+                              )),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Tip',
+                        style: TextStyle(
+                          color: Colors.teal.shade600,
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              '\$50',
+                              style: TextStyle(
+                                fontSize: 25.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
