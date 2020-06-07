@@ -183,7 +183,7 @@ class _TipCalculatorState extends State<TipCalculator> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              '\$50',
+                             '\$ ${calculateTotalTip(__billAmount, _personCounter, _tipPercentage)}',
                               style: TextStyle(
                                 fontSize: 25.0,
                               ),
@@ -195,7 +195,7 @@ class _TipCalculatorState extends State<TipCalculator> {
                   ),
                   Column(
                     children: <Widget>[
-                      Text("$_tipPercentage",style: TextStyle(
+                      Text("$_tipPercentage %",style: TextStyle(
                         fontSize: 30.0,
                         color: Colors.grey,
                         fontWeight: FontWeight.bold,
@@ -203,7 +203,6 @@ class _TipCalculatorState extends State<TipCalculator> {
                       Slider(
 
 
-                        divisions: 10,
                         activeColor: Colors.purple,
                         inactiveColor: Colors.grey,
                         min: 0,
@@ -225,4 +224,21 @@ class _TipCalculatorState extends State<TipCalculator> {
       ),
     );
   }
+   calculteTotalPerPerson(double totalTip, double billAmount, int splitBy){
+
+    var totalPerPerson = (totalTip + billAmount)/splitBy;
+    return totalPerPerson;
+
+
+   }
+    calculateTotalTip(double billAmount, int splitBy, int tipPercentage){
+    double totalTip = 0.0;
+    if (billAmount<0 || billAmount.toString().isEmpty || billAmount==null) {
+        //do nothing
+    }  else{
+      totalTip = (billAmount * tipPercentage)/100;
+    }
+    return totalTip;
+
+    }
 }
